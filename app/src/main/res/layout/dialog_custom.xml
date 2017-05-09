@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/background_custom_3">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/img_question_mark"
+            android:layout_margin="10dp"
+            android:id="@+id/questionMarkImageView" />
+        <TextView
+            android:text="Header text view"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorFireFox"
+            android:gravity="center|start"
+            android:id="@+id/headerTextView"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="1dp"
+        android:background="@color/colorSnow" />
+    <TextView
+        android:id="@+id/bodyTextView"
+        android:text="..."
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textColor="@color/colorSnow"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp">
+        <Button
+            android:text="No"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button"
+            android:textAllCaps="false"
+            android:id="@+id/noButton" />
+
+        <Button
+            android:text="Yes"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button"
+            android:textAllCaps="false"
+            android:id="@+id/yesButton" />
+    </LinearLayout>
+</LinearLayout>

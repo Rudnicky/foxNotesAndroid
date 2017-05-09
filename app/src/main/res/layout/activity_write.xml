@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_read"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.example.arakjel.foxsnotes.activities.WriteActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/img_wallpaper"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        android:inputType="textMultiLine"
+        android:hint="Enter text ..."
+        android:gravity="top"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_custom"
+        android:padding="10dp"
+        android:ems="10"
+        android:id="@+id/editText" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/img_fox_rest"
+        android:id="@+id/imageView4"
+        android:layout_marginTop="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Save it!"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@drawable/button_text_color"
+        android:background="@drawable/button"
+        android:id="@+id/saveButton"
+        android:textAllCaps="false"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+
+    <Button
+        android:text="Go Back"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textColor="@drawable/button_text_color"
+        android:background="@drawable/button"
+        android:id="@+id/goBackButton"
+        android:textAllCaps="false"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/saveButton"
+        android:layout_alignStart="@+id/saveButton"
+        android:layout_alignRight="@+id/saveButton"
+        android:layout_alignEnd="@+id/saveButton" />
+
+</RelativeLayout>

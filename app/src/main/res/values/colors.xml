@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorSnow">#f6f6f6</color>
+    <color name="colorRaven">#73191919</color>
+    <color name="colorRavenLight">#4D191919</color>
+    <color name="colorFireFox">#FF7F00</color>
+    <color name="colorCalmSea">#6666FF</color>
+    <color name="colorTurquse">#00ffcc</color>
+</resources>

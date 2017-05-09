@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arakjel.foxsnotes.activities.MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/img_wallpaper"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY"
+        android:id="@+id/imageView" />
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:text="Write"
+            android:fontFamily="sans-serif"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/writeButton"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:background="@drawable/button" />
+
+        <Button
+            android:text="Read"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/readButton"
+            android:layout_marginTop="5dp"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:background="@drawable/button" />
+
+        <Button
+            android:text="Clean"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/cleanButton"
+            android:layout_marginTop="5dp"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:background="@drawable/button" />
+
+        <Button
+            android:text="Exit"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:id="@+id/exitButton"
+            android:layout_marginTop="5dp"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_color"
+            android:background="@drawable/button" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/img_about"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/aboutImageView" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/img_fox"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView3" />
+</RelativeLayout>
