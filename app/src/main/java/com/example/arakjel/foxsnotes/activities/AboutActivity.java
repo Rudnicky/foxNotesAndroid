@@ -21,13 +21,12 @@ public class AboutActivity extends AppCompatActivity {
         fullScreen();
         setContentView(R.layout.activity_about);
         textView = (TextView) findViewById(R.id.textView);
-        textView.setText("Fox's note is an application for creating your notes, " +
+        textView.setText("Fox's notes is an application for creating your notes, " +
                 " which can be found as a text file in your Android device," +
-                " just above the Documents folder. Each note has it's own " +
-                " date and time that you won't worry about forgeting something! ;)," +
-                " Why beautiful fox? the answer is 'Because my Girlfriend has same stunning hair color'." +
+                " just above the Documents folder.\n" +
+                "Why beautiful fox? the answer is 'Because my Girlfriend has same stunning hair color'." +
                 " This application's fully for free. I've made it in order to" +
-                " create custom loggers to develop but the purpose is totally up to You Lov." +
+                " create custom loggers to develop but the purpose is totally \nup to You Lov." +
                 " \n\n\nHave Fun\nPawel Rudnicki.");
         goBackButton = (Button) findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(new View.OnClickListener() {

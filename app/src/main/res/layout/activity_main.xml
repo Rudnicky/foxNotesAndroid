@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.arakjel.foxsnotes.activities.MainActivity">
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +15,6 @@
         android:layout_centerHorizontal="true"
         android:scaleType="fitXY"
         android:id="@+id/imageView" />
-
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:orientation="vertical"

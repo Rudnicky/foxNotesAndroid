@@ -154,58 +154,62 @@ public class ReadActivity extends AppCompatActivity {
         cleanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isRemoveActive) {
-                    boolean[] tmp = adapter.getItemChecked();
-                    int positionOfTrue = 0;
-                    int[] array = new int[tmp.length];
+                if (!logger.isThereAnyMessage()) {
+                    if (isRemoveActive) {
+                        boolean[] tmp = adapter.getItemChecked();
+                        int positionOfTrue = 0;
+                        int[] array = new int[tmp.length];
 
-                    if (LoggerManager.listOfDiaryLines != null) {
-                        logger.read();
-                        list = new ArrayList<>(LoggerManager.listOfDiaryLines);
-                    }
-
-                    // iterate through each index of the boolean array
-                    // in order to find true/falses
-                    // when true's found then add it to the array
-                    // find the string beneath an index and add it to the array
-                    ArrayList<String> tmpList = new ArrayList<>();
-                    for (int i=0; i<tmp.length; i++) {
-                        if (tmp[i]) {
-                            positionOfTrue = i;
-                            array[i] = positionOfTrue;
-                            tmpList.add(list.get(positionOfTrue));
+                        if (LoggerManager.listOfDiaryLines != null) {
+                            logger.read();
+                            list = new ArrayList<>(LoggerManager.listOfDiaryLines);
                         }
-                    }
 
-                    // Iterate through the array with strings in order
-                    // to find same string in default list<string>
-                    // if found then remove it from the default list<string>
-                    for (int i=0; i<tmpList.size(); i++) {
-                        for (int j=0; j<list.size(); j++) {
-                            if (list.get(j).contains(tmpList.get(i))) {
-                                System.out.println("Found it: " + tmpList.get(i));
-                                list.remove(j);
+                        // iterate through each index of the boolean array
+                        // in order to find true/falses
+                        // when true's found then add it to the array
+                        // find the string beneath an index and add it to the array
+                        ArrayList<String> tmpList = new ArrayList<>();
+                        for (int i=0; i<tmp.length; i++) {
+                            if (tmp[i]) {
+                                positionOfTrue = i;
+                                array[i] = positionOfTrue;
+                                tmpList.add(list.get(positionOfTrue));
                             }
                         }
+
+                        // Iterate through the array with strings in order
+                        // to find same string in default list<string>
+                        // if found then remove it from the default list<string>
+                        for (int i=0; i<tmpList.size(); i++) {
+                            for (int j=0; j<list.size(); j++) {
+                                if (list.get(j).contains(tmpList.get(i))) {
+                                    System.out.println("Found it: " + tmpList.get(i));
+                                    list.remove(j);
+                                }
+                            }
+                        }
+
+                        // update list, view & adapter
+                        logger.removeAndCreate(list);
+                        initializeListView();
+                        adapter.notifyDataSetChanged();
+
+                        adapter.isCheckingAvailable = false;
+                        selectAllCheckBox.setVisibility(View.INVISIBLE);
+                        selectAllTextView.setVisibility(View.INVISIBLE);
+                        cleanButton.setText("Clean");
+                        isRemoveActive = false;
+                    } else {
+                        adapter.isCheckingAvailable = true;
+                        adapter.notifyDataSetChanged();
+                        selectAllCheckBox.setVisibility(View.VISIBLE);
+                        selectAllTextView.setVisibility(View.VISIBLE);
+                        cleanButton.setText("Remove selected");
+                        isRemoveActive = true;
                     }
-
-                    // update list, view & adapter
-                    logger.removeAndCreate(list);
-                    initializeListView();
-                    adapter.notifyDataSetChanged();
-
-                    adapter.isCheckingAvailable = false;
-                    selectAllCheckBox.setVisibility(View.INVISIBLE);
-                    selectAllTextView.setVisibility(View.INVISIBLE);
-                    cleanButton.setText("Clean");
-                    isRemoveActive = false;
                 } else {
-                    adapter.isCheckingAvailable = true;
-                    adapter.notifyDataSetChanged();
-                    selectAllCheckBox.setVisibility(View.VISIBLE);
-                    selectAllTextView.setVisibility(View.VISIBLE);
-                    cleanButton.setText("Remove selected");
-                    isRemoveActive = true;
+                    return;
                 }
             }
         });

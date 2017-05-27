@@ -1,4 +1,4 @@
-package com.example.arakjel.foxsnotes;
+package com.example.arakjel.foxsnotes.interfaces;
 
 public interface OnCustomDialogClickListener {
     void onDialogPositiveClick();

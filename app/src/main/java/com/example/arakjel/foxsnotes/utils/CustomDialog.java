@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.arakjel.foxsnotes.OnCustomDialogClickListener;
+import com.example.arakjel.foxsnotes.interfaces.OnCustomDialogClickListener;
 import com.example.arakjel.foxsnotes.R;
 
 

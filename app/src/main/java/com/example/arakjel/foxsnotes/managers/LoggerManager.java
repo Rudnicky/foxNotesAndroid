@@ -139,6 +139,10 @@ public class LoggerManager {
         }
     }
 
+    public boolean isThereAnyMessage() {
+        return listOfDiaryLines.isEmpty();
+    }
+
     private String getMessage(String message) {
         String tmp = DateFormat.getDateTimeInstance().format(new Date());
         return tmp + " - " + message;

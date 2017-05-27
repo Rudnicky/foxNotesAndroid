@@ -74,6 +74,7 @@ public class WriteActivity extends AppCompatActivity {
                 } else {
                     setCustomToast("Message saved!");
                     logger.write(tmp);
+                    finish();
                 }
             }
         });
