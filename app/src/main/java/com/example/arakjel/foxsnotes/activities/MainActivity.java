@@ -135,8 +135,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isCleanDialog = true;
-                setDialog("Warning!", "Are you sure that you want to clean whole text file? " +
-                        "You won't get back your old diary.", "No", "Yes");
+                if (logger.isFileEmpty()) {
+                    setCustomToast("There's no notes to clean up");
+                } else {
+                    setDialog("Warning!", "Are you sure that you want to clean whole text file? " +
+                            "You won't get back your old diary.", "No", "Yes");
+                }
             }
         });
 

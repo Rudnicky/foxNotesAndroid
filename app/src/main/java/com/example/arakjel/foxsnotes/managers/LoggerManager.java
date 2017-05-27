@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -137,6 +138,21 @@ public class LoggerManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isFileEmpty() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            if (br.readLine() == null) {
+                System.out.println("No errors, and file empty");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean isThereAnyMessage() {

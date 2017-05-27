@@ -34,7 +34,7 @@ public class WriteActivity extends AppCompatActivity {
     private Button goBackButton;
     private View customToastView;
     private TextView toastText;
-
+    private boolean isMessageShowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,10 @@ public class WriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String tmp = editText.getText().toString();
                 if (tmp.isEmpty()) {
-                    setCustomToast("Message cannot be empty");
+                    if (!isMessageShowed) {
+                        setCustomToast("Message cannot be empty");
+                        isMessageShowed = true;
+                    }
                     return;
                 } else {
                     setCustomToast("Message saved!");
@@ -83,6 +86,7 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                isMessageShowed = false;
             }
         });
 
