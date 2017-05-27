@@ -6,4 +6,5 @@
     <color name="colorFireFox">#FF7F00</color>
     <color name="colorCalmSea">#6666FF</color>
     <color name="colorTurquse">#00ffcc</color>
+    <color name="colorTransparent">#00000000 </color>
 </resources>
