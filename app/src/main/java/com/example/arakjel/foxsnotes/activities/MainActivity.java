@@ -1,13 +1,13 @@
 package com.example.arakjel.foxsnotes.activities;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.arakjel.foxsnotes.OnCustomDialogClickListener;
 import com.example.arakjel.foxsnotes.managers.LoggerManager;
 import com.example.arakjel.foxsnotes.R;
+import com.example.arakjel.foxsnotes.utils.CustomDialog;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,11 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView toastText;
 
     // custom dialog
-    private Dialog dialog;
-    private TextView headerTextView;
-    private TextView bodyTextView;
-    private Button noButton;
-    private Button yesButton;
+    private CustomDialog dialog;
+    private OnCustomDialogClickListener mListener;
     private boolean isCleanDialog;
     private boolean isPermissionDialog;
 
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         exitButton = (Button) findViewById(R.id.exitButton);
         logger = new LoggerManager();
         initializeToasts();
-        initializeDialog();
+        setupDialog();
     }
 
     private void initializeToasts() {
@@ -78,13 +77,32 @@ public class MainActivity extends AppCompatActivity {
         toastText = (TextView) customToastView.findViewById(R.id.toastText);
     }
 
-    private void initializeDialog() {
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_custom);
-        headerTextView = (TextView) dialog.findViewById(R.id.headerTextView);
-        bodyTextView = (TextView) dialog.findViewById(R.id.bodyTextView);
-        noButton = (Button) dialog.findViewById(R.id.noButton);
-        yesButton = (Button) dialog.findViewById(R.id.yesButton);;
+    private void setupDialog() {
+        mListener = new OnCustomDialogClickListener() {
+            @Override
+            public void onDialogPositiveClick() {
+                if (isCleanDialog) {
+                    setCustomToast("the mess's cleaned up");
+                    logger.clean();
+                    isCleanDialog = false;
+                } else if (isPermissionDialog) {
+                    isPermissionDialog = false;
+                    finish();
+                }
+            }
+
+            @Override
+            public void onDialogNegativeClick() {
+                if (isPermissionDialog) {
+                    isPermissionDialog = false;
+                    ActivityCompat.requestPermissions(MainActivity.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            PERMISSION_EXTERNAL_STORAGE);
+                }
+            }
+        };
+
+        dialog = new CustomDialog(this, mListener);
     }
     //------------------------------------------ INITIALIZE --------------------------------------//
 
@@ -119,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isCleanDialog = true;
                 setDialog("Warning!", "Are you sure that you want to clean whole text file? " +
-                        "You won't get back your old diary ;)");
-                noButton.setText("No");
-                yesButton.setText("Yes");
+                        "You won't get back your old diary.", "No", "Yes");
             }
         });
 
@@ -129,38 +145,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        // dialog buttons listeners
-        noButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isPermissionDialog) {
-                    dialog.dismiss();
-                    isPermissionDialog = false;
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            PERMISSION_EXTERNAL_STORAGE);
-                } else {
-                    dialog.dismiss();
-                }
-            }
-        });
-
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isCleanDialog) {
-                    setCustomToast("the mess's cleaned up");
-                    logger.clean();
-                    isCleanDialog = false;
-                    dialog.dismiss();
-                } else if (isPermissionDialog) {
-                    dialog.dismiss();
-                    isPermissionDialog = false;
-                    finish();
-                }
             }
         });
     }
@@ -182,9 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         " is unable to create a txt file in your Documents. If you won't allow" +
                         " this application to use an external device in order to write in to a file," +
                         " you won't be able to write your notes. Are you sure you want to deny " +
-                        "this permission?");
-                noButton.setText("Retry");
-                yesButton.setText("Exit");
+                        "this permission?", "Retry", "Exit");
                 isPermissionDialog = true;
             } else {
                 // No explanation needed, we can request the permission.
@@ -222,9 +204,7 @@ public class MainActivity extends AppCompatActivity {
                             " is unable to create a txt file in your Documents. If you won't allow" +
                             " this application to use an external device in order to write in to a file," +
                             " you won't be able to write your notes. Are you sure you want to deny " +
-                            "this permission?");
-                    noButton.setText("Retry");
-                    yesButton.setText("Exit");
+                            "this permission?", "Retry", "Exit");
                     isPermissionDialog = true;
                 }
                 return;
@@ -251,10 +231,12 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void setDialog(String header, String body) {
-        headerTextView.setText(header);
-        bodyTextView.setText(body);
+    private void setDialog(String header, String body, String noButtonText, String yesButtonText) {
         dialog.show();
+        dialog.headerTextView.setText(header);
+        dialog.bodyTextView.setText(body);
+        dialog.noButton.setText(noButtonText);
+        dialog.yesButton.setText(yesButtonText);
     }
     //------------------------------------------ METHODS -----------------------------------------//
 }
